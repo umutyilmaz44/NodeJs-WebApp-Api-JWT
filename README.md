@@ -9,6 +9,7 @@ Database first approach has been adopted in the project. Tables defined in Postg
 
 If you want to copy and run the project, you must first organize the commands in the **dump-baseDb.sql** file according to your own working environment, then run the commands and create the necessary database.
 
-YOu can use for login:
-Email   : muhuttun.gandak@gmail.com
-Password: admin
+You can use for login:
+>
+>Email   : muhuttun.gandak@gmail.com
+>Password: admin
