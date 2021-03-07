@@ -1,0 +1,472 @@
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="tools float-right">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-default dropdown-toggle btn-link btn-icon" data-toggle="dropdown">
+                    <i class="tim-icons icon-settings-gear-63"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#" id="addNewUser">Add New</a>
+                  </div>
+                </div>
+              </div>
+              <h4 class="card-title">User List</h4>
+            </div>
+            <div class="card-body">
+              <div class="toolbar">
+                <!--        Here you can write extra buttons/actions for the toolbar              -->
+              </div>
+              <table id="datatable" class="table table-striped">
+                
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal modal-black fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userEditModalLabel">User Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="FormUserProfile">
+                    <div class="form-group has-label">
+                        <label for="email" class="col-form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group has-label">
+                        <label for="firstName" class="col-form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                    </div>
+                    <div class="form-group has-label">
+                        <label for="lastName" class="col-form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                    </div>
+                    <input type="hidden" class="form-control" id="userId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="buttonSaveUserProfile">Save</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal modal-black fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="passwordChangeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordChangeModalLabel">Password Change</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="FormPasswordChange">
+                    <div class="form-group has-label">
+                        <label for="password" class="col-form-label">Current Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="form-group has-label">
+                        <label for="newPassword" class="col-form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" required>
+                    </div>
+                    <div class="form-group has-label">
+                        <label for="newPasswordConfirm" class="col-form-label">New Password Confirm</label>
+                        <input type="password" class="form-control" id="newPasswordConfirm" equalto="#newPassword" required>
+                    </div>
+                    <input type="hidden" class="form-control" id="userIdPsw">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="buttonChangePassword">Change</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal modal-black fade" id="userAddModal" tabindex="-1" role="dialog" aria-labelledby="userAddModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="userAddModalLabel">New User Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <i class="tim-icons icon-simple-remove"></i>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form id="FormNewUserProfile" class="form-horizontal">
+                <div class="row">
+                  <label class="col-md-4 col-form-label">Email</label>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="newUserEmail" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-4 col-form-label">First Name</label>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="newUserFirstName" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-4 col-form-label">Last Name</label>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="newUserLastName" required>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="row">
+                  <label class="col-md-4 col-form-label">Password</label>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="newUserPassword" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-md-4 col-form-label">Password Confirm</label>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="newUserPasswordConfirm" equalto="#newUserPassword" required>
+                    </div>
+                  </div>
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="buttonSaveNewUserProfile">Add</button>
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script>
+    pageInitFnc  = function() {       
+      initUserListTable();
+      initValidation();
+
+      $("#buttonSaveUserProfile").click(function(e) {
+          if( $("#FormUserProfile").valid()){
+            let email = $("input#email" ).val();
+            let firstName = $("input#firstName" ).val();
+            let lastName = $("input#lastName" ).val();
+            let userid = $("input#userId" ).val();
+
+            if(!email){
+                demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','Email is empty!');
+                return;
+            }
+
+            let userProfile = {
+              email:email,
+              firstName:firstName,
+              lastName:lastName
+            };
+            
+            $.ajax({
+              url: "/api/users/" + userid,
+              type: 'PUT',
+              dataType: "json",
+              data: JSON.stringify({userProfile : userProfile}),
+              contentType: "application/json",
+              success: function(data) {
+              //checking if data coming from php is "success"
+                console.log(data);
+                
+                if (data.message && data.message == "Success") {
+                  $('#userEditModal').modal('hide');
+                  demo.showNotify('bottom','right', 'success','icon-check-2','User information has updated successfully.');
+                  loadUserList();
+                } else{
+                  demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc','An error has occured!');
+                }
+              },
+              error: function(xhr, status, error) {
+                demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+              }
+            });    
+          }
+      });
+
+      $("#buttonChangePassword").click(function(e) {
+          if( $("#FormPasswordChange").valid()){
+            let password = $("input#password" ).val();
+            let newPassword = $("input#newPassword" ).val();
+            let newPasswordConfirm = $("input#newPasswordConfirm" ).val();
+            let userid = $("input#userIdPsw" ).val();
+            let pswData = {
+                password: password,
+                newPassword: newPassword
+            };
+
+            if(!password){
+                demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','Current password is empty!');
+            }
+            else if(!newPassword || newPassword !== newPasswordConfirm){
+                demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','New passwords is not mismatch each other!');
+            }
+            else{
+                $.ajax({
+                    url: "/api/users/psw/" + userid,
+                    type: 'PUT',
+                    dataType: "json",
+                    data: JSON.stringify({pswData : pswData}),
+                    contentType: "application/json",
+                    success: function(data) {
+                    //checking if data coming from php is "success"
+                        console.log(data);
+                        
+                        if (data.message && data.message == "Success") {
+                            $('#passwordChangeModal').modal('hide');
+                            demo.showNotify('bottom','right', 'success','icon-check-2','Password has updated successfully.');
+                        } else{
+                            demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc','An error has occured!');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+                    }   
+                });
+            }
+          }
+      });
+    
+      $("#buttonSaveNewUserProfile").click(function(e) {
+          if( $("#FormNewUserProfile").valid()){
+            let email = $("input#newUserEmail" ).val();
+            let firstName = $("input#newUserFirstName" ).val();
+            let lastName = $("input#newUserLastName" ).val();
+            let password = $("input#newUserPassword" ).val();
+            let passwordConfirm = $("input#newUserPasswordConfirm" ).val();
+
+            if(!email){
+                demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','Email is empty!');
+                return;
+            }
+            if(!password){
+                demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','Password is empty!');
+                return;
+            }
+            else if(!password || password !== passwordConfirm){
+                demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','Passwords is not mismatch each other!');
+                return;
+            }
+
+            let userProfile = {
+              email:email,
+              firstName:firstName,
+              lastName:lastName,
+              password: password
+            };
+            
+            $.ajax({
+              url: "/api/users",
+              type: 'POST',
+              dataType: "json",
+              data: JSON.stringify({userProfile : userProfile}),
+              contentType: "application/json",
+              success: function(data) {
+              //checking if data coming from php is "success"
+                console.log(data);
+                
+                if (data.message && data.message == "Success") {
+                  $('#userAddModal').modal('hide');
+                  demo.showNotify('bottom','right', 'success','icon-check-2','User has added successfully.');
+                  loadUserList();
+                } else{
+                  demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc','An error has occured!');
+                }
+              },
+              error: function(xhr, status, error) {
+                demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+              }
+            });    
+          }
+      });
+    }
+
+    function initUserListTable(){
+        $('#datatable').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search records",
+            },
+            "ajax": {
+                "url": "/api/users",
+                "data": function ( d ) {
+                        // d.actions = 
+                        // // d.custom = $('#myInput').val();
+                        // // etc
+                    }
+            },
+            "columns": [
+                { data: "id", "title": "id", "visible": false },
+                { data: "firstName", "title": "First Name"},
+                { data: "lastName", "title": "Last Name" },
+                { data: "email", "title": "Email" },
+                { data: "actions", "title": "Actions", sortable:false,
+                    render: function(data, type, row, meta) {
+                        
+                            return `<a href="javascript:void(0)" class="btn btn-link btn-info btn-icon btn-sm edit"><i class="tim-icons icon-pencil"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-link btn-warning btn-icon btn-sm psw-chng"><i class="tim-icons icon-key-25"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-link btn-danger btn-icon btn-sm remove"><i class="tim-icons icon-trash-simple"></i></a>`;
+                        
+                    }
+                }
+            ]
+        });
+
+      var table = $('#datatable').DataTable();
+
+      // Edit record
+      table.on('click', '.edit', function() {
+
+        resetFormValidation('FormUserProfile');
+
+        $tr = $(this).closest('tr');
+        if ($($tr).hasClass('child')) {
+          $tr = $tr.prev('.parent');
+        }
+
+        var data = table.row($tr).data();
+        $("input#email").val(data.email);
+        $("input#firstName").val(data.firstName);
+        $("input#lastName").val(data.lastName);
+        $("input#userId").val(data.id);
+        
+        $('#userEditModal').modal('show');
+      });
+
+      // Delete a record
+      table.on('click', '.remove', async function(e) {        
+        $tr = $(this).closest('tr');
+        if ($($tr).hasClass('child')) {
+          $tr = $tr.prev('.parent');
+        }
+        var data = table.row($tr).data();
+        //showSwal('warning-message-and-confirmation');
+        let confirmResult;
+        try{
+          confirmResult =  await Confirm('Are you sure?', "You won't be able to revert this!", 'Yes, delete it!', 'No, cancel!');
+        }
+        catch(error){
+          console.log(error);
+        }
+        console.log(confirmResult);
+        if (confirmResult.isConfirmed) {
+          deleteUser(data.id, (data) => {
+            table.row($tr).remove().draw();
+            demo.showNotify('bottom','right', 'success','icon-check-2','User has deleted successfully.');
+          }, (xhr, status, error) => {
+            demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+          });
+          
+        }
+        
+        //e.preventDefault();
+      });
+
+      //Pswd Change
+      table.on('click', '.psw-chng', function() {
+        $tr = $(this).closest('tr');
+        if ($($tr).hasClass('child')) {
+          $tr = $tr.prev('.parent');
+        }
+
+        var data = table.row($tr).data();
+        console.log(data);
+        $("input#password").val('');
+        $("input#newPassword").val('');
+        $("input#newPasswordConfirm").val('');
+        $("input#userIdPsw").val(data.id);
+
+        resetFormValidation('FormPasswordChange');
+        $('#passwordChangeModal').modal('show');
+      });
+      
+      $("#addNewUser").click(function(e) {
+        
+        $("input#newUserEmail").val('');
+        $("input#newUserFirstName").val('');
+        $("input#newUserLastName").val('');
+        $("input#newUserPassword").val('');
+        $("input#newUserPasswordConfirm").val('');
+        
+        resetFormValidation('FormNewUserProfile');
+        $('#userAddModal').modal('show');
+      });
+    }
+    
+    function deleteUser(id, successFnc, errorFnc){
+      $.ajax({
+          url: "/api/users/" + id,
+          type: 'DELETE',
+          success: function(data) {
+            successFnc(data);
+          },
+          error: function(xhr, status, error) {
+            errorFnc(xhr, status, error);
+            
+          }
+        });
+    }
+   
+    function loadUserList(){
+      $('#datatable').DataTable().ajax.reload();
+    }
+    
+    setFormValidation = function (id) {
+        let validator = $(id).validate({
+            highlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
+            $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
+            },
+            success: function(element) {
+            $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
+            $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
+            },
+            errorPlacement: function(error, element) {
+            $(element).closest('.form-group').append(error);
+            },
+        });
+
+        return validator;
+    }
+    resetFormValidation = function (id) {
+      $('#' + id)[0].reset();
+      $('#' + id).find(".form-group").removeClass("has-danger").removeClass("has-success");
+      $('#' + id).validate().resetForm();
+      $('#' + id).validate().submitted = {};      
+    }
+
+    initValidation = function () {
+      setFormValidation('#FormUserProfile');
+      setFormValidation('#FormPasswordChange');
+      setFormValidation('#FormNewUserProfile');
+    };
+
+</script>

@@ -1,0 +1,48 @@
+<div class="login-page">
+    <div class="content">
+      <div class="container">
+        <div class="ml-auto mr-auto col-md-6 col-lg-4">
+          <form class="form" method="POST" action="/auth/login">
+            <div class="card-login card-white card">
+              <div class="card-header">
+                <img alt="..." src="/assets/img/card-primary.png" style="max-height: 100px;">
+                <h1 class="card-title">Log in</h1>
+              </div>
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="tim-icons icon-email-85"></i></span>
+                  </div>
+                  <input placeholder="Username" type="text" class="form-control" name="username" required>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="tim-icons icon-lock-circle"></i></span>
+                  </div>
+                  <input placeholder="Password" type="password" class="form-control" name="password" required>
+                </div>
+              </div>
+              <div class="card-footer">
+                <input type="submit" value="Get Started" class="mb-3 btn btn-primary btn-lg btn-block"/>
+                <!-- <a href="#pablo" class="mb-3 btn btn-primary btn-lg btn-block">Get Started</a> -->
+                <div class="pull-left">
+                  <h6><a class="link footer-link" href="/auth/register">Create Account</a></h6>
+                </div>
+                <div class="pull-right">
+                  <h6><a class="link footer-link" href="#pablo">Need Help?</a></h6>
+                </div>
+              </div>
+              <% if (typeof(error) != "undefined") { %>
+                <div class="alert alert-danger" style="margin: 15px; font-size: 12px;">
+                  <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+                  <span><%= error %></span>
+                </div>
+              <% } %>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>  
+  </div>

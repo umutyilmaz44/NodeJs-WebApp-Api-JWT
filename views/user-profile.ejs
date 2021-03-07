@@ -1,0 +1,257 @@
+<div class="content">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-divider">
+            <h5 class="title">Edit Profile</h5>
+          </div>
+          <div class="card-body pb-0">
+            <form id="FormUserProfile">
+              <div class="row"> 
+                <div class="col-md-12">
+                  <div class="form-group has-label">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" placeholder="Email Address" value=""
+                      name="email" id="email" required> 
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-md-1">
+                  <div class="form-group has-label">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" value=""
+                      name="firstName" id="firstName" required>
+                  </div>
+                </div>
+                <div class="col-md-6 pl-md-1">
+                  <div class="form-group has-label">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" placeholder="Last Name" value=""
+                      name="lastName" id="lastName" required>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer pt-0 pb-2">
+            <button type="submit" class="btn btn-fill btn-primary" name="buttonSaveUserProfile" id="buttonSaveUserProfile" >Save</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header card-header-divider">
+            <h5 class="title">Change Password</h5>
+          </div>
+          <div class="card-body pb-0">
+            <form id="FormPasswordChange">
+              <div class="row">
+                <div class="col-md-6 pr-md-1">
+                  <div class="form-group has-label">
+                    <label>Current Password</label>
+                    <input type="password" class="form-control" placeholder="" value=""
+                      name="password" id="password" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">                
+                <div class="col-md-6 pr-md-1">
+                  <div class="form-group has-label">
+                    <label>New Password</label>
+                    <input type="password" class="form-control" placeholder="" value=""
+                      name="newPassword" id="newPassword" required>
+                  </div>
+                </div>
+                <div class="col-md-6 pl-md-1">
+                  <div class="form-group has-label">
+                    <label>New Password Confirm</label>
+                    <input type="password" class="form-control" placeholder="" value=""
+                      name="newPasswordConfirm" id="newPasswordConfirm" equalto="#newPassword" required>
+                  </div>
+                </div>
+              </div>              
+            </form>
+          </div>
+          <div class="card-footer pt-0 pb-2">
+            <button type="submit" class="btn btn-fill btn-primary" name="buttonChangePassword" id="buttonChangePassword" >Change</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-user">
+          <div class="card-body">
+            <p class="card-text">
+              <div class="author">
+                <div class="block block-one"></div>
+                <div class="block block-two"></div>
+                <div class="block block-three"></div>
+                <div class="block block-four"></div>
+                <a href="javascript:void(0)">
+                  <img class="avatar" src="../assets/img/anime3.png" alt="...">
+                  <h5 class="title" name="userFullName" id="userFullName"></h5>
+                </a>
+                <p class="description">
+                  Ceo/Co-Founder
+                </p>
+              </div>
+            </p>
+            <div class="card-description">
+              Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="button-container">
+              <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
+                <i class="fab fa-facebook"></i>
+              </button>
+              <button href="javascript:void(0)" class="btn btn-icon btn-round btn-twitter">
+                <i class="fab fa-twitter"></i>
+              </button>
+              <button href="javascript:void(0)" class="btn btn-icon btn-round btn-google">
+                <i class="fab fa-google-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script>
+    setFormValidation = function (id) {
+        $(id).validate({
+          highlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
+            $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
+          },
+          success: function(element) {
+            $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
+            $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
+          },
+          errorPlacement: function(error, element) {
+            $(element).closest('.form-group').append(error);
+          },
+        });
+      }
+
+    pageInitFnc  = function() {
+      $("#buttonSaveUserProfile").click(function(e) {
+          if( $("#FormUserProfile").valid()){
+            let email = $("input#email" ).val();
+            let firstName = $("input#firstName" ).val();
+            let lastName = $("input#lastName" ).val();
+            let userProfile = {
+              email:email,
+              firstName:firstName,
+              lastName:lastName
+            };
+
+            $.ajax({
+              url: "/api/users/" + '<%= userData.uid %>',
+              type: 'PUT',
+              dataType: "json",
+              data: JSON.stringify({userProfile : userProfile}),
+              contentType: "application/json",
+              success: function(data) {
+              //checking if data coming from php is "success"
+                console.log(data);
+                
+                if (data.message && data.message == "Success") {
+                  demo.showNotify('bottom','right', 'success','icon-check-2','User information has updated successfully.');
+                  loadUserProfile();
+                } else{
+                  demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc','An error has occured!');
+                }
+              },
+              error: function(xhr, status, error) {
+                demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+                console.log(xhr.responseText);
+                console.log(error);
+                console.log(status);
+                console.log(xhr);
+              }
+            });          
+          }
+        });
+    
+      $("#buttonChangePassword").click(function(e) {
+        if( $("#FormPasswordChange").valid()){
+          let password = $("input#password" ).val();
+          let newPassword = $("input#newPassword" ).val();
+          let newPasswordConfirm = $("input#newPasswordConfirm" ).val();
+          let pswData = {
+              password: password,
+              newPassword: newPassword
+          };
+
+          if(!password){
+            demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','Current password is empty!');
+          }
+          else if(!newPassword || newPassword !== newPasswordConfirm){
+            demo.showNotify('bottom','right', 'warning','icon-alert-circle-exc','New passwords is not mismatch each other!');
+          }
+          else{
+            $.ajax({
+              url: "/api/users/psw/" + '<%= userData.uid %>',
+              type: 'PUT',
+              dataType: "json",
+              data: JSON.stringify({pswData : pswData}),
+              contentType: "application/json",
+              success: function(data) {
+              //checking if data coming from php is "success"
+                console.log(data);
+                
+                if (data.message && data.message == "Success") {
+                  demo.showNotify('bottom','right', 'success','icon-check-2','Password has updated successfully.');
+                } else{
+                  demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc','An error has occured!');
+                }
+              },
+              error: function(xhr, status, error) {
+                demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+                console.log(xhr.responseText);
+                console.log(error);
+                console.log(status);
+                console.log(xhr);
+              }
+            });
+          }
+        }
+      });
+      
+      loadUserProfile();
+
+      initValidation();
+    }
+    loadUserProfile = function (){
+      $.ajax({
+            url: "/api/users/" + '<%= userData.uid %>',
+            type: 'GET',
+            success: function(data) {
+            //checking if data coming from php is "success"
+              console.log(data);
+              
+              if (data.message && data.message == "Success") {
+                $("input#email").val(data.user.email_address);
+                $("input#firstName").val(data.user.first_name);
+                $("input#lastName").val(data.user.last_name);
+                $("h5#userFullName").html(data.user.first_name + ' ' + data.user.last_name);
+              } else{
+                demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc','An error has occured!');
+              }
+            },
+            error: function(xhr, status, error) {
+              demo.showNotify('bottom','right', 'danger','icon-alert-circle-exc', xhr.responseText);
+              console.log(xhr.responseText);
+              console.log(error);
+              console.log(status);
+              console.log(xhr);
+            }
+          });
+    }
+    
+    initValidation = function () {
+      setFormValidation('#FormUserProfile');
+      setFormValidation('#FormPasswordChange');
+    };
+ </script>
