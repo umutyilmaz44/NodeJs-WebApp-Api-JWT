@@ -7,6 +7,6 @@ JavaScript was used as a programming language in the project.
 
 Database first approach has been adopted in the project. Tables defined in Postgresql are automatically transformed into models in the project with sequalize-auto.
 
-If you want to copy and run the project, you must first organize the commands in the db.init file according to your own working environment, then run the commands and create the necessary database.
+If you want to copy and run the project, you must first organize the commands in the **dump-baseDb.sql** file according to your own working environment, then run the commands and create the necessary database.
 
 
