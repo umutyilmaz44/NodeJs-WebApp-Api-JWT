@@ -3,6 +3,7 @@ This project aims to show how to do it by using JWT in a single project with Nod
 
 Technologies and libraries used in the project are specified in the noteice.md file.
 To mention in summary; Express ejs sequelize is used.
+JavaScript was used as a programming language in the project.
 
 Database first approach has been adopted in the project. Tables defined in Postgresql are automatically transformed into models in the project with sequalize-auto.
 
