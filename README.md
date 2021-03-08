@@ -15,6 +15,6 @@ You can use for login:
 >
 >Password: admin
 
-![Demo](https://user-images.githubusercontent.com/42136540/110258269-cb7ff900-7fb2-11eb-974a-adda9e3004e9.mp4)
+![Demo Video](https://user-images.githubusercontent.com/42136540/110258269-cb7ff900-7fb2-11eb-974a-adda9e3004e9.mp4)
 
 ![Screenshot](screenshots/Screen%20Shot%202021-03-08%20at%2001.29.09.png)
